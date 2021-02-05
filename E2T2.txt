@@ -1,0 +1,13 @@
++---+----------------------------------------------------------------------------+
+|   | Provide recommendations on how to remediate the vulnerabilities.           |
++---+----------------------------------------------------------------------------+
+| 1 | AttackInstanceSG:                                                          |
+|   | - 4.1 Ensure no security groups allow ingress from 0.0.0.0/0 to port 22    |
++---+----------------------------------------------------------------------------+
+| 2 | WebAppSG:                                                                  |
+|   | - 4.1 Ensure no security groups allow ingress from 0.0.0.0/0 to port 22    |
+|   | - 4.2 Ensure no security groups allow ingress from 0.0.0.0/0 to port 3389  |
++---+----------------------------------------------------------------------------+
+| 3 | default:                                                                   |
+|   | - 4.3 Ensure the default security group of every VPC restricts all traffic |
++---+----------------------------------------------------------------------------+

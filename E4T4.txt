@@ -1,0 +1,15 @@
++---+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+|   | Additional Architecture change can be made to reduce the internet facing attack surface of the web application instance                                                 |
++---+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 1 | Add Cloudfront in front of the load balancer and require any ssh to instances be done through AWS System Manager,                                                       |
+|   | then remove all external access to the instances                                                                                                                        |
++---+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 2 | Assuming the IAM permissions for the S3 bucket are still insecure, would creating VPC private endpoints for S3 prevent unauthorized access to the secrets bucket.       |
+|   | Using VPC private endpoints alone would not prevent unauthorized access to the secrets bucket if the IAM permissions are still insecure.                                |
++---+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 3 | Will applying the default encryption setting to the S3 buckets encrypt the data that already exists? No, applying default encryption will not retroactively encrypt all |
+|   | the existing files. You would need to go back and encrypt all the files as well.                                                                                        |
++---+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| 4 | What would happen if the original cloud formation templates are applied to this environment? The remediation steps that have been make would be reverted                |
+|   | and all of the original security risk would be back, as such the CloudFormation scripts should be updated with any required fixes.                                      |
++---+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+

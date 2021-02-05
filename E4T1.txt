@@ -1,0 +1,28 @@
++---+-------------------------------------------------------------------------------------------------------------------+
+|   | Text file identifying 2 poor security practices with justification.                                               |
++---+-------------------------------------------------------------------------------------------------------------------+
+| 1 | Both public and private subnet network ACL rules allow all traffic on all ports from all ports.                   |
+|   | Network ACL rules should be used to minimize the available network connectivity to reduce the traffic             |
+|   | that can be sent to and from the subnet. This will reduce the ability for malicious actions that could            |
+|   | be performed against the infrastructure by an attacker, and will keep the private subnet (and contents) private.  |
++---+-------------------------------------------------------------------------------------------------------------------+
+| 2 | S3 buckets, including the bucket for VPC flow logs, have no server-side encryption enabled/files were uploaded    |
+|   | without encryption and all the buckets have block public access disabled.                                         |
+|   | Not encrypting the contents of the S3 buckets could allow people who shouldn't have access to the content to view |
+|   | the content within the buckets.                                                                                   |
+|   | The vpc-flow-logs may contain compromising information that could directly or indirectly cause further security   |
+|   | compromises if the rest of the infraestructure is not set up correctly.                                           |
++---+-------------------------------------------------------------------------------------------------------------------+
+| 3 | The S3 buckets do not follow the principle of least privilege.                                                    |
+|   | By default, all S3 buckets are private and can be accessed only by users that are explicitly granted access.      |
+|   | When using AWS, it's best practice to restrict access to your resources to the people that absolutely need it.    |
+|   | Follow the principle of least privilege.                                                                          |
+|   | Restrict access to your S3 buckets or objects by:                                                                 |
+|   | a) Writing AWS Identity and Access Management (IAM) user policies                                                 |
+|   | b) Writing bucket policies that define access to specific buckets and objects                                     |
+|   | c) Using Amazon S3 block public access as a centralized way to limit public access                                |
+|   | d) Setting access control list (ACLs) on your buckets and objects                                                 |
++---+-------------------------------------------------------------------------------------------------------------------+
+| 4 | APIs credentials should not be exposed directly because it can compromise sensitive data,                         |
+|   |  cloud services, and cloud infraestructure.                                                                       |
++---+-------------------------------------------------------------------------------------------------------------------+
